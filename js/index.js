@@ -50,14 +50,19 @@ selectPrice.addEventListener('change', function () {
     }
 })
 
+//=====================modal======
+
 const modal = document.getElementById("myModal");
 const btn = document.querySelector(".btn-check");
 const span = document.getElementsByClassName("close")[0];
 const closeBtn = document.getElementById("modal__submit");
 const email = document.getElementById("email")
 const customerName = document.getElementById("name")
+const cancel = document.getElementById('cancel')
 
 btn.onclick = function () {
+    email.value = ""
+    customerName.value = ""
     modal.style.display = "block"
 }
 
@@ -71,10 +76,12 @@ closeBtn.addEventListener('click', function (event) {
     }
     if (customerName.value.trim() && email.value.trim()) {
         alert("Благодарим за покупки!")
-        email.value = ""
-        customerName.value = ""
         modal.style.display = "none"
         count.innerText = "XXX"
         order.innerText = "XXX"
     }
+})
+
+cancel.addEventListener("click", function () {
+    modal.style.display = "none"
 })
