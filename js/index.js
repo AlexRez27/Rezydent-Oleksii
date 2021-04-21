@@ -8,22 +8,27 @@ const selectPrice = document.getElementById('selectPrice')
 const selectCat = document.getElementById('selectCat')
 
 let money = []
-let basketCount = 0
+let basketCount = []
 let basketOrder = 0
 
 document.addEventListener('DOMContentLoaded', function () {
     for (let i = 0; i < price.length; i++) {
         price[i].dataset.price = price[i].innerText.replace(' грн.', '')
+        money = document.querySelectorAll('[data-price]')
     }
-    money = document.querySelectorAll('[data-price]')
+    for (let i = 0; i < dishesBox.length; i++) {
+        dishesBox[i].id = i + 1
+    }
 })
 
 for (let i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener('click', function () {
         if (qty[i].value > 0) {
-            basketCount += +qty[i].value
+            if (!basketCount.includes(dishesBox[i].id)) {
+                basketCount.push(dishesBox[i].id)
+            }
             basketOrder += +money[i].dataset.price * +qty[i].value
-            count.innerText = basketCount
+            count.innerText = basketCount.length
             order.innerText = basketOrder
             qty[i].value = null
         }
